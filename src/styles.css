@@ -11,7 +11,7 @@
   font-optical-sizing: auto;
   font-weight: 400;
 
-  --ink: #20312f;
+  --ink: #e6eeed;
   --muted: #788581;
   --line: #e9eeea;
   --accent: #ed2449;
@@ -224,7 +224,7 @@ h2 {
   list-style: none;
 }
 
-.place-list li + li {
+.place-list li+li {
   margin-top: 5px;
 }
 
@@ -396,7 +396,7 @@ h2 {
   font-size: 14px;
 }
 
-.popup-card > p:not(.popup-card__category) {
+.popup-card>p:not(.popup-card__category) {
   margin-bottom: 11px;
   color: #65716c;
   font-size: 11px;
@@ -462,7 +462,7 @@ h2 {
     gap: 3px;
   }
 
-  .place-list li + li {
+  .place-list li+li {
     margin-top: 0;
   }
 
@@ -691,4 +691,95 @@ h2 {
 .route-delete-button:disabled {
   cursor: wait;
   opacity: 0.6;
+}
+
+.route-recorder__start-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: var(--green);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    box-shadow 150ms ease,
+    transform 150ms ease;
+}
+
+.route-recorder__start-button:not(:disabled):hover {
+  background: #1d6663;
+  box-shadow: 0 4px 12px rgb(36 123 120 / 20%);
+  transform: translateY(-1px);
+}
+
+.route-recorder__start-button:not(:disabled):active {
+  transform: translateY(0);
+}
+
+.route-recorder__start-button:focus-visible {
+  outline: 3px solid rgb(36 123 120 / 35%);
+  outline-offset: 2px;
+}
+
+.route-recorder__start-button:disabled {
+  background: #aab7b3;
+  color: #fff;
+  cursor: not-allowed;
+  opacity: 0.75;
+}
+.route-recorder__download-button,
+.route-recorder__publish-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 13px;
+  border-radius: 9px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.route-recorder__download-button {
+  border: 1px solid var(--line);
+  background: #4c23b1;
+  color: var(--ink);
+}
+
+.route-recorder__download-button:not(:disabled):hover {
+  border-color: #cce0d8;
+  background: #a24ad8;
+}
+
+.route-recorder__publish-button {
+  border: 1px solid var(--green);
+  background: var(--green);
+  color: #fff;
+}
+
+.route-recorder__publish-button:not(:disabled):hover {
+  border-color: #1d6663;
+  background: #1d6663;
+  box-shadow: 0 4px 12px rgb(36 123 120 / 20%);
+}
+
+.route-recorder__download-button:focus-visible,
+.route-recorder__publish-button:focus-visible {
+  outline: 3px solid rgb(36 123 120 / 35%);
+  outline-offset: 2px;
+}
+
+.route-recorder__publish-button:disabled {
+  cursor: wait;
+  opacity: 0.65;
 }

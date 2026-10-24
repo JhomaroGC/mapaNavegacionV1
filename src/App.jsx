@@ -800,6 +800,7 @@ function App() {
 
             {routeRecordStatus === "idle" && (
               <button
+                className="route-recorder__start-button"
                 type="button"
                 onClick={startRouteRecording}
                 disabled={!routesLoaded || !routeStorageReady}
@@ -854,6 +855,7 @@ function App() {
                     <li key={savedRoute.id}>
                       <span>{savedRoute.name}</span>
                       <button
+                        className="route-recorder__download-button"
                         type="button"
                         onClick={() => downloadRecordedRoute(savedRoute)}
                       >
@@ -863,6 +865,7 @@ function App() {
                         <span>Publicada</span>
                       ) : (
                         <button
+                          className="route-recorder__publish-button"
                           type="button"
                           onClick={() => publishRecordedRoute(savedRoute)}
                           disabled={publishingRouteId === savedRoute.id}
@@ -940,7 +943,9 @@ function App() {
             <span className="place-count">{visiblePoints.length}</span>
           </div>
           {isAdmin && (
-            <button type="button" onClick={openNewPoiModal}>
+            <button
+              className="route-recorder__start-button"
+              type="button" onClick={openNewPoiModal}>
               Agregar punto
             </button>
           )}
