@@ -112,12 +112,13 @@ function App() {
 
   const visiblePoints = useMemo(
     () =>
-      activeCategory === "Todas"
+      (activeCategory === "Todas"
         ? pointsOfInterest
-        : pointsOfInterest.filter((point) => point.category === activeCategory),
+        : pointsOfInterest.filter((point) => point.category === activeCategory)
+      ).toSorted((a, b) => a.name.localeCompare(b.name, "es")),
     [activeCategory, pointsOfInterest],
   );
-
+  let id_place = 0;
   useEffect(() => {
     const unsubscribe = onSnapshot(
       collection(db, "pois"),
@@ -196,14 +197,14 @@ function App() {
               data.coordinates.length < 2 ||
               data.coordinates.some(
                 (coordinate) =>
-                  !Array.isArray(coordinate) ||
-                  coordinate.length !== 2 ||
-                  !Number.isFinite(coordinate[0]) ||
-                  coordinate[0] < -180 ||
-                  coordinate[0] > 180 ||
-                  !Number.isFinite(coordinate[1]) ||
-                  coordinate[1] < -90 ||
-                  coordinate[1] > 90,
+                  !coordinate ||
+                  typeof coordinate !== "object" ||
+                  !Number.isFinite(coordinate.longitude) ||
+                  coordinate.longitude < -180 ||
+                  coordinate.longitude > 180 ||
+                  !Number.isFinite(coordinate.latitude) ||
+                  coordinate.latitude < -90 ||
+                  coordinate.latitude > 90,
               )
             ) {
               throw new Error(
@@ -214,7 +215,10 @@ function App() {
             return {
               id: document.id,
               name: data.name.trim(),
-              coordinates: data.coordinates,
+              coordinates: data.coordinates.map(({ longitude, latitude }) => [
+                longitude,
+                latitude,
+              ]),
               startedAt:
                 typeof data.startedAt === "string" ? data.startedAt : null,
               createdAt:
@@ -624,7 +628,10 @@ function App() {
         name: savedRoute.name,
         startedAt: savedRoute.startedAt ?? null,
         createdAt: savedRoute.createdAt,
-        coordinates: savedRoute.coordinates,
+        coordinates: savedRoute.coordinates.map(([longitude, latitude]) => ({
+          longitude,
+          latitude,
+        })),
         publishedAt: serverTimestamp(),
       });
     } catch (error) {
@@ -878,6 +885,7 @@ function App() {
 
               <ul className="place-list">
                 {visiblePoints.map((point) => (
+
                   <li className="place-list-item" key={point.id}>
                     <button
                       className={`place-card${selectedPoint?.id === point.id ? " is-selected" : ""}`}
@@ -888,7 +896,7 @@ function App() {
                         {point.icon}
                       </span>
                       <span className="place-card__copy">
-                        <span className="place-card__name">{point.name}</span>
+                        <span className="place-card__name">{id_place += 1} {point.name}</span>
                         <span className="place-card__category">{point.category}</span>
                       </span>
                       <span className="place-card__arrow" aria-hidden="true">›</span>
@@ -919,11 +927,6 @@ function App() {
             </>
           )}
         </section>
-
-        <p className="demo-note">
-          Los puntos se cargan desde Firestore. Las líneas de recorrido siguen
-          siendo demostrativas.
-        </p>
       </aside>
 
       <section className="map-panel" aria-label="Mapa interactivo del parque">
