@@ -73,7 +73,8 @@ function App() {
   const [publishedRoutes, setPublishedRoutes] = useState([]);
   const [deletingRouteId, setDeletingRouteId] = useState(null);
   const [routeDeleteError, setRouteDeleteError] = useState("");
-  const [activePublishedRouteId, setActivePublishedRouteId] = useState(null);
+  const [selectedPublishedRouteIds, setSelectedPublishedRouteIds] = useState([]);
+  const knownPublishedRouteIdsRef = useRef(new Set());
   const [publishedRoutesLoading, setPublishedRoutesLoading] = useState(true);
   const [publishedRoutesError, setPublishedRoutesError] = useState("");
   const [publishingRouteId, setPublishingRouteId] = useState(null);
@@ -230,7 +231,21 @@ function App() {
                 typeof data.createdAt === "string" ? data.createdAt : null,
             };
           });
+          const currentRouteIds = new Set(
+            routesFromFirestore.map((route) => route.id),
+          );
+          const newRouteIds = [...currentRouteIds].filter(
+            (id) => !knownPublishedRouteIdsRef.current.has(id),
+          );
 
+          knownPublishedRouteIdsRef.current = currentRouteIds;
+
+          setSelectedPublishedRouteIds((selectedIds) => [
+            ...new Set([
+              ...selectedIds.filter((id) => currentRouteIds.has(id)),
+              ...newRouteIds,
+            ]),
+          ]);
           setPublishedRoutes(routesFromFirestore);
           setPublishedRoutesError("");
         } catch (error) {
@@ -900,22 +915,36 @@ function App() {
           {publishedRoutes.length > 0 && (
             <div className="route-options" role="group" aria-label="Seleccionar ruta visible">
               {publishedRoutes.map((publishedRoute) => {
-                const isActive = activePublishedRouteId === publishedRoute.id;
+                const isSelected = selectedPublishedRouteIds.includes(
+                  publishedRoute.id,
+                );
 
                 return (
-
                   <div className="route-option-row" key={publishedRoute.id}>
-                    <button
-                      className={`route-option${isActive ? " is-active" : ""}`}
-                      onClick={() =>
-                        setActivePublishedRouteId(isActive ? null : publishedRoute.id)
-                      }
-                      type="button"
-                      aria-pressed={isActive}
-                    >
-                      <span className="route-option__line" aria-hidden="true" />
+                    <label className={`route-option${isSelected ? " is-active" : ""}`}>
+                      <input
+                        type="checkbox"
+                        checked={isSelected}
+                        onChange={(event) => {
+                          const checked = event.target.checked;
+
+                          setSelectedPublishedRouteIds((selectedIds) =>
+                            checked
+                              ? [...selectedIds, publishedRoute.id]
+                              : selectedIds.filter((id) => id !== publishedRoute.id),
+                          );
+                        }}
+                        aria-label={`Mostrar ruta ${publishedRoute.name}`}
+                      />
+                      <span
+                        className={`route-option__line${publishedRoute.category === "Sendero"
+                            ? " route-option__line--accessible"
+                            : ""
+                          }`}
+                        aria-hidden="true"
+                      />
                       <span>{publishedRoute.name}</span>
-                    </button>
+                    </label>
 
                     {isAdmin && (
                       <button
@@ -1046,23 +1075,23 @@ function App() {
           <MapFocus position={selectedPoint?.position} />
 
 
-          {publishedRoutes.map((publishedRoute, index) =>
-            publishedRoute.id === activePublishedRouteId ? (
-              <Polyline
-                key={publishedRoute.id}
-                positions={publishedRoute.coordinates.map(toLeafletPosition)}
-                pathOptions={{
-                  color: ["#d6335c", "#5b6ee1", "#d28a27", "#8a55a2"][
-                    index % 4
-                  ],
-                  weight: 5,
-                  opacity: 0.9,
-                  dashArray:
-                    publishedRoute.category === "Sendero" ? "6 6" : undefined,
-                }}
-              />
-            ) : null,
-          )}
+{publishedRoutes.map((publishedRoute, index) =>
+  selectedPublishedRouteIds.includes(publishedRoute.id) ? (
+    <Polyline
+      key={publishedRoute.id}
+      positions={publishedRoute.coordinates.map(toLeafletPosition)}
+      pathOptions={{
+        color: ["#d6335c", "#5b6ee1", "#d28a27", "#8a55a2"][
+          index % 4
+        ],
+        weight: 5,
+        opacity: 0.9,
+        dashArray:
+          publishedRoute.category === "Sendero" ? "6 6" : undefined,
+      }}
+    />
+  ) : null,
+)}
           {isAdmin && routeCoordinates.length >= 2 && (
             <Polyline
               positions={routeCoordinates.map(toLeafletPosition)}
