@@ -71,6 +71,8 @@ function App() {
   const routeCoordinatesRef = useRef([]);
   const recordingStartedAtRef = useRef(null);
   const [publishedRoutes, setPublishedRoutes] = useState([]);
+  const [deletingRouteId, setDeletingRouteId] = useState(null);
+  const [routeDeleteError, setRouteDeleteError] = useState("");
   const [activePublishedRouteId, setActivePublishedRouteId] = useState(null);
   const [publishedRoutesLoading, setPublishedRoutesLoading] = useState(true);
   const [publishedRoutesError, setPublishedRoutesError] = useState("");
@@ -671,6 +673,36 @@ function App() {
       setPublishingRouteId(null);
     }
   }
+  async function deletePublishedRoute(route) {
+    if (!isAdmin || !authUser) {
+      setRouteDeleteError(
+        "Debes iniciar sesión con una cuenta administradora para eliminar rutas.",
+      );
+      return;
+    }
+
+    const confirmed = window.confirm(
+      `¿Eliminar la ruta publicada “${route.name}”? La copia local del administrador se conservará.`,
+    );
+
+    if (!confirmed) return;
+
+    setRouteDeleteError("");
+    setDeletingRouteId(route.id);
+
+    try {
+      await deleteDoc(doc(db, "routes", route.id));
+
+      if (activePublishedRouteId === route.id) {
+        setActivePublishedRouteId(null);
+      }
+    } catch (error) {
+      const code = error instanceof Error ? error.code : "error desconocido";
+      setRouteDeleteError(`No se pudo eliminar la ruta (${code}).`);
+    } finally {
+      setDeletingRouteId(null);
+    }
+  }
   function downloadRecordedRoute(savedRoute) {
     const geoJson = {
       type: "Feature",
@@ -868,18 +900,32 @@ function App() {
                 const isActive = activePublishedRouteId === publishedRoute.id;
 
                 return (
-                  <button
-                    className={`route-option${isActive ? " is-active" : ""}`}
-                    key={publishedRoute.id}
-                    onClick={() =>
-                      setActivePublishedRouteId(isActive ? null : publishedRoute.id)
-                    }
-                    type="button"
-                    aria-pressed={isActive}
-                  >
-                    <span className="route-option__line" aria-hidden="true" />
-                    <span>{publishedRoute.name}</span>
-                  </button>
+
+                  <div className="route-option-row" key={publishedRoute.id}>
+                    <button
+                      className={`route-option${isActive ? " is-active" : ""}`}
+                      onClick={() =>
+                        setActivePublishedRouteId(isActive ? null : publishedRoute.id)
+                      }
+                      type="button"
+                      aria-pressed={isActive}
+                    >
+                      <span className="route-option__line" aria-hidden="true" />
+                      <span>{publishedRoute.name}</span>
+                    </button>
+
+                    {isAdmin && (
+                      <button
+                        className="route-delete-button"
+                        type="button"
+                        onClick={() => deletePublishedRoute(publishedRoute)}
+                        disabled={deletingRouteId === publishedRoute.id}
+                        aria-label={`Eliminar ruta publicada ${publishedRoute.name}`}
+                      >
+                        {deletingRouteId === publishedRoute.id ? "Eliminando..." : "Eliminar"}
+                      </button>
+                    )}
+                  </div>
                 );
               })}
             </div>
