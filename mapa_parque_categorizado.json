@@ -1,0 +1,434 @@
+[
+  {
+    "id": 1,
+    "nombre": "Zona de Estacionamiento",
+    "descripcion": "Zona de parqueadero gratuita para carros y motocicletas, disponible para visitantes del Parque Comfama Arví hasta agotar espacios. Su uso es opcional y el parque no se hace responsable por daños o pérdidas de objetos o vehículos.",
+    "categoria": "Movilidad y parqueaderos",
+    "coords": [
+      6.261388208102964,
+      -75.49464232031012
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 2,
+    "nombre": "Bus Comfama",
+    "descripcion": "Ruta gratuita Comfama - MetroCable para visitantes del parque, con trayecto entre la estación Arví y el Parque Comfama Arví. Servicio sujeto al horario habitual del parque y a disponibilidad.",
+    "categoria": "Movilidad y transporte",
+    "coords": [
+      6.261462861942021,
+      -75.49489981236545
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 3,
+    "nombre": "Vivero",
+    "descripcion": "Espacio dedicado a la germinación, recuperación y cuidado de especies vegetales. Ideal para experiencias de educación ambiental, recorridos de sostenibilidad y conexión con la naturaleza. Actividad sujeta a programación, aforo y condiciones climáticas.",
+    "categoria": "Naturaleza y sostenibilidad",
+    "coords": [
+      6.262454690505089,
+      -75.49396640366488
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 4,
+    "nombre": "Tirolina",
+    "descripcion": "Atracción de canopy entre árboles con dos vuelos: 360 metros de ida y 270 metros de regreso, conectados por plataformas y pruebas en altura. Actividad incluida con el ingreso al parque. Requiere estatura mínima de 1,55 m, peso máximo de 90 kg, curso de iniciación obligatorio y participación por orden de llegada. Uso restringido para personas bajo efectos de alcohol o sustancias psicoactivas. Sujeta a condiciones climáticas. Disponible sábados, domingos y festivos, y en temporada alta también los jueves, según programación del parque.",
+    "categoria": "Atracciones de aventura",
+    "coords": [
+      6.263163,
+      -75.493444
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 5,
+    "nombre": "Silleta 1",
+    "descripcion": "Espacio tipo salón para reuniones empresariales, capacitaciones y eventos de pequeño formato, rodeado de naturaleza. Tiene capacidad aproximada para 25 personas. Requiere reserva previa y está sujeto a disponibilidad, programación del parque y condiciones del servicio.",
+    "categoria": "Salones y eventos",
+    "coords": [
+      6.262314,
+      -75.495225
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 6,
+    "nombre": "Silleta 2",
+    "descripcion": "Experiencia de naturaleza y sostenibilidad con recorridos por la huerta y el vivero, actividades de siembra y conversación al aire libre. Actividad incluida con el ingreso al parque, ideal para todas las edades. Participación por orden de llegada y aforo del espacio. Sujeta a condiciones climáticas.",
+    "categoria": "Naturaleza y sostenibilidad",
+    "coords": [
+      6.2631372380992545,
+      -75.49412733619945
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 7,
+    "nombre": "Silleta 3",
+    "descripcion": "Punto de lectura y picnic literario en medio del bosque, operado como experiencia de biblioteca Comfama. Espacio para leer, imaginar y conectarse con historias en un entorno natural. Actividad incluida con el ingreso al parque, disponible según programación, por orden de llegada y aforo del espacio.",
+    "categoria": "Cultura y bienestar",
+    "coords": [
+      6.264683631705077,
+      -75.49502855838637
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 8,
+    "nombre": "Tienda Doña Ana",
+    "descripcion": "Punto gastronómico con oferta saludable, panadería e hidratación. Cuenta con opciones como lasañas, wraps, bowls de vegetales y productos para hacer una pausa durante el recorrido por el parque. Servicio sujeto a disponibilidad y operación del día.",
+    "categoria": "Gastronomía",
+    "coords": [
+      6.265003574646696,
+      -75.49502855838469
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 9,
+    "nombre": "Silleta 4",
+    "descripcion": "Experiencia de tradición silletera que conecta a los visitantes con la cultura de Santa Elena. Incluye relatos campesinos, acercamiento al origen de las silletas y posibilidad de tomarse fotos con elementos típicos. Actividad incluida con el ingreso al parque, disponible según programación, por orden de llegada y aforo del espacio.",
+    "categoria": "Cultura y tradición",
+    "coords": [
+      6.265721,
+      -75.495139
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 10,
+    "nombre": "Guaca",
+    "descripcion": "Auditorio principal del parque, ideal para convenciones, eventos empresariales, capacitaciones y encuentros de gran formato. Tiene capacidad aproximada para 270 personas. Requiere reserva previa y está sujeto a disponibilidad, programación del parque y condiciones del servicio.",
+    "categoria": "Salones y eventos",
+    "coords": [
+      6.266659,
+      -75.49537
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 11,
+    "nombre": "Silleta 5",
+    "descripcion": "Experiencia de bienestar para el cuerpo y la mente con actividades como respiración consciente, relajación, automasajes, aromaterapia, silencio y meditación. Actividad incluida con el ingreso al parque, disponible según programación, por orden de llegada y aforo del espacio.",
+    "categoria": "Bienestar y conexión",
+    "coords": [
+      6.26708319896373,
+      -75.4947817951427
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 12,
+    "nombre": "Comején y Saltamontes",
+    "descripcion": "Zona de juego familiar con toboganes secos y lonas saltarinas para disfrutar en medio del bosque. Actividad incluida con el ingreso al parque, de uso familiar y por orden de llegada. Sujeta a condiciones climáticas, aforo del espacio y programación del parque.",
+    "categoria": "Atracciones familiares",
+    "coords": [
+      6.267285828576879,
+      -75.49521094856826
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 13,
+    "nombre": "Árbol de las Buenas Historias",
+    "descripcion": "Experiencia narrative alrededor de un roble animatrónico de más de 200 años, acompañado por personajes como Mardilla la ardilla y Bica el barranquero. Actividad incluida con el ingreso al parque. Duración aproximada de 15 minutos por relato y capacidad estimada de 25 a 30 personas por turno. Participación por orden de llegada, sujeta a condiciones climáticas y programación del parque.",
+    "categoria": "Experiencias familiares",
+    "coords": [
+      6.267936375770473,
+      -75.49523240627654
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 14,
+    "nombre": "Silleta 6",
+    "descripcion": "Espacio creativo de artes del bosque con actividades de pintura y manualidades rodeadas de naturaleza. Actividad incluida con el ingreso al parque, ideal para todas las edades. Participación por orden de llegada, sujeta a aforo y programación del parque.",
+    "categoria": "Arte y creatividad",
+    "coords": [
+      6.268075016866495,
+      -75.49565083086647
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 15,
+    "nombre": "Silleta 7",
+    "descripcion": "Experiencia infantil y familiar inspirada en el Reino Fungi, con juegos, retos, columpios, nidos y dispositivos de entretenimiento en medio del bosque. Actividad incluida con el ingreso al parque, sujeta a condiciones climáticas, aforo, orden de llegada y programación del parque.",
+    "categoria": "Atracciones familiares",
+    "coords": [
+      6.268224322620993,
+      -75.49626237449787
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 16,
+    "nombre": "Volcán",
+    "descripcion": "Atracción familiar tipo montaña inflable para escalar, deslizarse y disfrutar en un entorno seguro. Actividad incluida con el ingreso al parque. Requiere estatura mínima de 0,90 m. Uso restringido para personas bajo efectos de alcohol o sustancias psychoactivas. Participación por orden de llegada, sujeta a condiciones climáticas, aforo y programación del parque.",
+    "categoria": "Atracciones familiares",
+    "coords": [
+      6.268885533305814,
+      -75.49678808744419
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 17,
+    "nombre": "Carriquíes",
+    "descripcion": "Zona de columpios gigantes al aire libre, cada uno con dos puestos, para vivir una experiencia de emoción y diversión en medio del bosque. Actividad incluida con el ingreso al parque. Requiere estatura mínima de 1,10 m. Uso restringido para personas bajo efectos de alcohol o sustancias psychoactivas. Participación por fila y orden de llegada, sujeta a condiciones climáticas y programación del parque.",
+    "categoria": "Atracciones familiares",
+    "coords": [
+      6.268949521392129,
+      -75.49660569723832
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 18,
+    "nombre": "Ciempíes",
+    "descripcion": "Edificio que alberga los salones 1, 2, 3, 4, 5 y 6, disponibles para reuniones, capacitaciones y eventos empresariales. Los salones cuentan con equipamiento audiovisual, sonido e internet, según disponibilidad. Requiere reserva previa y está sujeto a programación del parque.",
+    "categoria": "Salones y eventos",
+    "coords": [
+      6.266816580951973,
+      -75.49673444326599
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 19,
+    "nombre": "Restaurante Bigos",
+    "descripcion": "Restaurante principal del parque con oferta gastronómica variada, incluyendo almuerzos a la carta, platos típicos, menú oriental, chicken fingers, hamburguesas y menú del día. Servicio sujeto a disponibilidad y operación del día.",
+    "categoria": "Gastronomía",
+    "coords": [
+      6.266262015009135,
+      -75.49675590093727
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 20,
+    "nombre": "Letras Comfama",
+    "descripcion": "Zona verde para el disfrute familiar, ideal para fotografías, descanso, picnic y conexión con el entorno natural del parque. Se recomienda cuidar el espacio, disponer adecuadamente los residuos y atender las indicaciones del personal del parque.",
+    "categoria": "Zonas verdes y descanso",
+    "coords": [
+      6.262998595745513,
+      -75.49118763508547
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 21,
+    "nombre": "Zona Quebrada El Rosario",
+    "descripcion": "Zona verde amplia y despejada, ideal para actividades deportivas, encuentros grupales y eventos empresariales al aire libre. Su uso puede estar sujeto a reserva, disponibilidad operativa, aforo, condiciones climáticas y programación del parque.",
+    "categoria": "Zonas verdes y eventos",
+    "coords": [
+      6.263873108778623,
+      -75.49110180440036
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 22,
+    "nombre": "Aventura Comfama",
+    "descripcion": "Atracción de aventura con 68 retos distribuidos en 4 circuitos: Familiar, Explorador, Deportivo y Extremo. Incluye puentes, tirolinas, pasos elevados y obstáculos entre árboles, con alturas entre 2 y 20 metros. Actividad incluida con el ingreso al parque y única atracción con turnos, entregados en el ingreso hasta agotar existencia. Requiere curso de iniciación obligatorio. Estatura mínima: 1,20 m para circuito familiar, 1,45 m para explorador y 1,55 m para deportivo y extremo. Edad máxima: 70 años. Peso máximo: 130 kg. Sujeta a condiciones climáticas y programación del parque.",
+    "categoria": "Atracciones de aventura",
+    "coords": [
+      6.261601504811749,
+      -75.48968559809603
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 23,
+    "nombre": "Aventura Empresarial",
+    "descripcion": "Experiencia outdoor exclusiva para empresas, enfocada en fortalecer liderazgo, confianza, comunicación efectiva, estrategia y toma de decisiones en entornos naturales. Requiere reserva previa obligatoria. Actividad al aire libre, sujeta a condiciones climáticas. Duración estimada: jornada completa.",
+    "categoria": "Experiencias empresariales",
+    "coords": [
+      6.263947762237844,
+      -75.48885947768368
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 24,
+    "nombre": "Mirador de los Robles",
+    "descripcion": "Plataforma con vista al bosque de Santa Elena, ideal para contemplar el paisaje, tomar fotografías y hacer una pausa durante el recorrido. Se recomienda transitar con precaución, respetar las zonas delimitadas y atender las indicaciones del personal del parque. Uso sujeto a condiciones climáticas y disponibilidad del espacio.",
+    "categoria": "Miradores y contemplación",
+    "coords": [
+      6.270753079316271,
+      -75.49457182342796
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 25,
+    "nombre": "Contexto Minero 1",
+    "descripcion": "Este lugar conserva vestigios de antiguas actividades mineras que formaron parte de la historia del territorio Arví. Investigaciones arqueológicas han identificado en esta zona canales y modificaciones del terreno asociados a contextos mineros, evidencias que permiten comprender cómo las comunidades del pasado aprovecharon los recursos naturales de la región. Estos hallazgos hacen parte del patrimonio arqueológico de Santa Elena y nos recuerdan que, mucho antes de convertirse en un bosque para la conservación y el encuentro con la naturaleza, este territorio fue escenario de importantes actividades humanas",
+    "categoria": "Vestigios Arqueológicos",
+    "coords": [
+      6.2687624450458515,
+      -75.49411468617103
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 26,
+    "nombre": "Contexto Minero 2",
+    "descripcion": "Este lugar conserva vestigios de antiguas actividades mineras que formaron parte de la historia del territorio Arví. Investigaciones arqueológicas han identificado en esta zona canales y modificaciones del terreno asociados a contextos mineros, evidencias que permiten comprender cómo las comunidades del pasado aprovecharon los recursos naturales de la región. Estos hallazgos hacen parte del patrimonio arqueológico de Santa Elena y nos recuerdan que, mucho antes de convertirse en un bosque para la conservación y el encuentro con la naturaleza, este territorio fue escenario de importantes actividades humanas",
+    "categoria": "Vestigios Arqueológicos",
+    "coords": [
+      6.272797363523998,
+      -75.49203103137883
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 27,
+    "nombre": "Natural Cross",
+    "descripcion": "Este espacio fue diseñado para promover el trabajo en equipo, la actividad física y el bienestar a través de retos que combinan movimiento, estrategia y superación personal. En medio del entorno natural de Arví, los participantes enfrentan diferentes pruebas de fuerza, equilibrio, coordinación, resistencia y agilidad, transformando el bosque en un escenario de aprendizaje y aventura. El Natural Cross invita a descubrir nuevas capacidades, fortalecer la confianza y disfrutar de la naturaleza desde una experiencia activa y desafiante",
+    "categoria": "Vestigios Arqueológicos",
+    "coords": [
+      6.261715170212045,
+      -75.48739174312581
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 28,
+    "nombre": "Kiosco 1",
+    "descripcion": "Espacio amplio sobre la vía ideal para actividades grupales al aire libre que requieren una zona amplia. El uso de esta zona puede estar sujeta a reserva previa",
+    "categoria": "Zonas verdes y descanso",
+    "coords": [
+      6.264468,
+      -75.494646
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 29,
+    "nombre": "Tiendas Aventura Comfama, ",
+    "descripcion": "Tienda de snacks, Tienda de Accesorios y candados",
+    "categoria": "Tiendas",
+    "coords": [
+      6.261151,
+      -75.489756
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 30,
+    "nombre": "Rotonda superior Aventura Comfama, ",
+    "descripcion": "Espacio amplio sobre la vía ideal para actividades grupales al aire libre que requieren una zona amplia. El uso de esta zona puede estar sujeta a reserva previa",
+    "categoria": "Zonas verdes y eventos",
+    "coords": [
+      6.262295,
+      -75.48984
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 31,
+    "nombre": "Café con Mucho Amor",
+    "descripcion": "Cafetería de Ingreso",
+    "categoria": "Restaurante-Cafetería",
+    "coords": [
+      6.261905,
+      -75.49455
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 32,
+    "nombre": "Préstamo de bicicletas",
+    "descripcion": "Descubre el Parque Comfama Arví de una manera diferente mientras avanzas por sus senderos y caminos rodeados de naturaleza. El servicio de préstamo de bicicletas te permite explorar el territorio a tu propio ritmo, disfrutar del aire libre y vivir una experiencia activa que combina bienestar, recreación y conexión con el entorno natural. La actividad está incluida con el ingreso al parque y está dirigida a familias, jóvenes y visitantes que desean conocer Arví desde una nueva perspectiva. Disponible sábados, domingos y festivos.",
+    "categoria": "Movilidad y transporte",
+    "coords": [
+      6.262379,
+      -75.494641
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 33,
+    "nombre": "Zona de picnic 1",
+    "descripcion": "Un espacio rodeado de naturaleza y equipado con carpas tipo araña, ideal para compartir momentos especiales en familia o con amigos. Aquí podrás descansar, conversar, disfrutar de un picnic y conectarte con la tranquilidad del bosque mientras vives una experiencia de bienestar al aire libre",
+    "categoria": "Zonas verdes y descanso",
+    "coords": [
+      6.262463,
+      -75.494434
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 34,
+    "nombre": "Zona de picnic 2",
+    "descripcion": "Un espacio rodeado de naturaleza y equipado con carpas tipo araña, ideal para compartir momentos especiales en familia o con amigos. Aquí podrás descansar, conversar, disfrutar de un picnic y conectarte con la tranquilidad del bosque mientras vives una experiencia de bienestar al aire libre",
+    "categoria": "Zonas verdes y descanso",
+    "coords": [
+      6.266447,
+      -75.495172
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 35,
+    "nombre": "Mina de los Valores",
+    "descripcion": "En este espacio los niños y sus familias podrán vivir una divertida experiencia inspirada en la antigua minería de Arví. Aquí, a través del juego y la exploración, los participantes descubren cómo se buscaban materiales en el territorio mientras desarrollan valores fundamentales para convivir, compartir y trabajar en equipo",
+    "categoria": "Atracciones familiares",
+    "coords": [
+      6.268405,
+      -75.496491
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  },
+  {
+    "id": 36,
+    "nombre": "Kiosco 20",
+    "descripcion": "Espacio amplio sobre la vía ideal para actividades grupales al aire libre que requieren una zona amplia",
+    "categoria": "Zonas verdes y eventos",
+    "coords": [
+      6.270075,
+      -75.493026
+    ],
+    "horario": "9:00am a 5:00pm",
+    "categoria_accesible": "Accesible"
+  }
+]
