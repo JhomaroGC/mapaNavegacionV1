@@ -14,7 +14,7 @@
   --ink: #20312f;
   --muted: #788581;
   --line: #e9eeea;
-  --accent: #e76f35;
+  --accent: #ed2449;
   --green: #247b78;
 }
 
@@ -366,13 +366,16 @@ h2 {
 }
 
 .poi-marker__dot {
-  display: block;
-  width: 22px;
-  height: 22px;
-  border: 5px solid #fff;
+  display: flex;
+  width: 30px;
+  height: 30px;
+  border: 2px solid #fff;
   border-radius: 50%;
   background: var(--accent);
   box-shadow: 0 2px 9px rgb(35 62 50 / 34%);
+  color: white;
+  justify-content: center;
+  align-items: center;
 }
 
 .popup-card {

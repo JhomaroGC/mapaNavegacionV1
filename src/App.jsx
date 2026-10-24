@@ -26,12 +26,13 @@ import L from "leaflet";
 import { parkCenter } from "./data/park.js";
 import { auth, db, googleProvider } from "./firebase.js";
 
-const markerIcon = L.divIcon({
-  className: "poi-marker",
-  html: '<span class="poi-marker__dot"></span>',
-  iconSize: [22, 22],
-  iconAnchor: [11, 11],
-});
+const createMarkerIcon = (index) =>
+  L.divIcon({
+    className: "poi-marker",
+    html: `<span class="poi-marker__dot">${index + 1}</span>`,
+    iconSize: [30, 30],
+    iconAnchor: [20, 20],
+  });
 
 const RECORDED_ROUTES_STORAGE_KEY = "parque-arvi-recorded-routes";
 
@@ -42,7 +43,7 @@ function MapFocus({ position }) {
 
   useEffect(() => {
     if (position) {
-      map.flyTo(toLeafletPosition(position), 17, { duration: 0.5 });
+      map.flyTo(toLeafletPosition(position), 18, { duration: 0.5 });
     }
   }, [map, position]);
 
@@ -70,6 +71,7 @@ function App() {
   const routeCoordinatesRef = useRef([]);
   const recordingStartedAtRef = useRef(null);
   const [publishedRoutes, setPublishedRoutes] = useState([]);
+  const [activePublishedRouteId, setActivePublishedRouteId] = useState(null);
   const [publishedRoutesLoading, setPublishedRoutesLoading] = useState(true);
   const [publishedRoutesError, setPublishedRoutesError] = useState("");
   const [publishingRouteId, setPublishingRouteId] = useState(null);
@@ -118,7 +120,7 @@ function App() {
       ).toSorted((a, b) => a.name.localeCompare(b.name, "es")),
     [activeCategory, pointsOfInterest],
   );
-  let id_place = 0;
+
   useEffect(() => {
     const unsubscribe = onSnapshot(
       collection(db, "pois"),
@@ -215,6 +217,7 @@ function App() {
             return {
               id: document.id,
               name: data.name.trim(),
+              category: data.category === "Sendero" ? "Sendero" : "Principal",
               coordinates: data.coordinates.map(({ longitude, latitude }) => [
                 longitude,
                 latitude,
@@ -280,7 +283,12 @@ function App() {
         throw new Error("El contenido guardado no tiene un formato de ruta válido.");
       }
 
-      setRecordedRoutes(parsedRoutes);
+      setRecordedRoutes(
+        parsedRoutes.map((savedRoute) => ({
+          ...savedRoute,
+          category: savedRoute.category === "Sendero" ? "Sendero" : "Principal",
+        })),
+      );
       setRouteStorageReady(true);
     } catch (error) {
       const message =
@@ -585,9 +593,30 @@ function App() {
       return;
     }
 
+    const enteredCategory = window.prompt(
+      "Categoría del recorrido:\n1. Principal\n2. Sendero",
+      "1",
+    );
+
+    if (enteredCategory === null) {
+      return;
+    }
+
+    const categoryByOption = {
+      "1": "Principal",
+      "2": "Sendero",
+    };
+    const category = categoryByOption[enteredCategory.trim()];
+
+    if (!category) {
+      setRouteRecordError("Elige 1 para Principal o 2 para Sendero.");
+      return;
+    }
+
     const newRoute = {
       id: crypto.randomUUID(),
       name,
+      category,
       startedAt: recordingStartedAtRef.current,
       createdAt: new Date().toISOString(),
       coordinates: coordinates.map(([longitude, latitude]) => [
@@ -626,6 +655,7 @@ function App() {
     try {
       await setDoc(doc(db, "routes", savedRoute.id), {
         name: savedRoute.name,
+        category: savedRoute.category,
         startedAt: savedRoute.startedAt ?? null,
         createdAt: savedRoute.createdAt,
         coordinates: savedRoute.coordinates.map(([longitude, latitude]) => ({
@@ -720,7 +750,7 @@ function App() {
           <p>
             {isAdmin
               ? "Acceso de administrador."
-              : "Iniciar sesión no concede permisos de administración."}
+              : ""}
           </p>
         </section>
 
@@ -818,7 +848,7 @@ function App() {
           </section>
         )}
         <section className="route-picker" aria-labelledby="published-routes-heading">
-          <h2 id="published-routes-heading">Rutas publicadas</h2>
+          <h2 id="published-routes-heading">Rutas</h2>
 
           {publishedRoutesLoading && (
             <p role="status">Cargando rutas publicadas...</p>
@@ -833,13 +863,26 @@ function App() {
             )}
 
           {publishedRoutes.length > 0 && (
-            <ul>
-              {publishedRoutes.map((publishedRoute) => (
-                <li key={publishedRoute.id}>
-                  {publishedRoute.name} ({publishedRoute.coordinates.length} ubicaciones)
-                </li>
-              ))}
-            </ul>
+            <div className="route-options" role="group" aria-label="Seleccionar ruta visible">
+              {publishedRoutes.map((publishedRoute) => {
+                const isActive = activePublishedRouteId === publishedRoute.id;
+
+                return (
+                  <button
+                    className={`route-option${isActive ? " is-active" : ""}`}
+                    key={publishedRoute.id}
+                    onClick={() =>
+                      setActivePublishedRouteId(isActive ? null : publishedRoute.id)
+                    }
+                    type="button"
+                    aria-pressed={isActive}
+                  >
+                    <span className="route-option__line" aria-hidden="true" />
+                    <span>{publishedRoute.name}</span>
+                  </button>
+                );
+              })}
+            </div>
           )}
         </section>
         <section className="places" aria-labelledby="places-heading">
@@ -884,7 +927,7 @@ function App() {
               </div>
 
               <ul className="place-list">
-                {visiblePoints.map((point) => (
+                {visiblePoints.map((point, index) => (
 
                   <li className="place-list-item" key={point.id}>
                     <button
@@ -896,7 +939,7 @@ function App() {
                         {point.icon}
                       </span>
                       <span className="place-card__copy">
-                        <span className="place-card__name">{id_place += 1} {point.name}</span>
+                        <span className="place-card__name">{index + 1} {point.name}</span>
                         <span className="place-card__category">{point.category}</span>
                       </span>
                       <span className="place-card__arrow" aria-hidden="true">›</span>
@@ -952,19 +995,23 @@ function App() {
           <MapFocus position={selectedPoint?.position} />
 
 
-          {publishedRoutes.map((publishedRoute, index) => (
-            <Polyline
-              key={publishedRoute.id}
-              positions={publishedRoute.coordinates.map(toLeafletPosition)}
-              pathOptions={{
-                color: ["#d6335c", "#5b6ee1", "#d28a27", "#8a55a2"][
-                  index % 4
-                ],
-                weight: 5,
-                opacity: 0.9,
-              }}
-            />
-          ))}
+          {publishedRoutes.map((publishedRoute, index) =>
+            publishedRoute.id === activePublishedRouteId ? (
+              <Polyline
+                key={publishedRoute.id}
+                positions={publishedRoute.coordinates.map(toLeafletPosition)}
+                pathOptions={{
+                  color: ["#d6335c", "#5b6ee1", "#d28a27", "#8a55a2"][
+                    index % 4
+                  ],
+                  weight: 5,
+                  opacity: 0.9,
+                  dashArray:
+                    publishedRoute.category === "Sendero" ? "6 6" : undefined,
+                }}
+              />
+            ) : null,
+          )}
           {isAdmin && routeCoordinates.length >= 2 && (
             <Polyline
               positions={routeCoordinates.map(toLeafletPosition)}
@@ -990,9 +1037,9 @@ function App() {
                   }}
                 />
               ))}
-          {visiblePoints.map((point) => (
+          {visiblePoints.map((point, index) => (
             <Marker
-              icon={markerIcon}
+              icon={createMarkerIcon(index)}
               key={point.id}
               position={toLeafletPosition(point.position)}
               eventHandlers={{ click: () => selectPoint(point) }}
@@ -1002,7 +1049,7 @@ function App() {
                   <p className="popup-card__category">
                     {point.icon} {point.category}
                   </p>
-                  <h3>{point.name}</h3>
+                  <h3>{index + 1}. {point.name}</h3>
                   <p>{point.description}</p>
                   <dl>
                     <div>
