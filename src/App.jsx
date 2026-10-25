@@ -49,7 +49,19 @@ function MapFocus({ position }) {
 
   return null;
 }
+function UserLocationFocus({ position }) {
+  const map = useMap();
+  const hasCenteredRef = useRef(false);
 
+  useEffect(() => {
+    if (position && !hasCenteredRef.current) {
+      map.flyTo(toLeafletPosition(position), 18, { duration: 0.5 });
+      hasCenteredRef.current = true;
+    }
+  }, [map, position]);
+
+  return null;
+}
 
 function App() {
 
@@ -60,7 +72,8 @@ function App() {
   const [poisError, setPoisError] = useState("");
   const [authUser, setAuthUser] = useState(undefined);
   const [authError, setAuthError] = useState("");
-
+  const [userLocation, setUserLocation] = useState(null);
+  const [locationError, setLocationError] = useState("");
   const [routeRecordStatus, setRouteRecordStatus] = useState("idle");
   const [routeCoordinates, setRouteCoordinates] = useState([]);
   const [recordedRoutes, setRecordedRoutes] = useState([]);
@@ -329,6 +342,60 @@ function App() {
       },
     );
   }, []);
+  useEffect(() => {
+    if (!authUser) {
+      setUserLocation(null);
+      setLocationError("");
+      return;
+    }
+
+    if (!("geolocation" in navigator)) {
+      setLocationError("Este navegador no ofrece geolocalización.");
+      return;
+    }
+
+    const watchId = navigator.geolocation.watchPosition(
+      ({ coords }) => {
+        const { latitude, longitude, heading } = coords;
+
+        if (
+          !Number.isFinite(latitude) ||
+          latitude < -90 ||
+          latitude > 90 ||
+          !Number.isFinite(longitude) ||
+          longitude < -180 ||
+          longitude > 180
+        ) {
+          setLocationError("El navegador devolvió una ubicación inválida.");
+          return;
+        }
+
+        setUserLocation({
+          position: [longitude, latitude],
+          heading: Number.isFinite(heading) ? heading : null,
+        });
+        setLocationError("");
+      },
+      (error) => {
+        const messages = {
+          1: "Permite el acceso a la ubicación en el navegador para mostrar tu posición.",
+          2: "No se pudo determinar tu ubicación.",
+          3: "La solicitud de ubicación agotó el tiempo de espera.",
+        };
+
+        setLocationError(
+          messages[error.code] ?? "Ocurrió un error al obtener la ubicación.",
+        );
+      },
+      {
+        enableHighAccuracy: true,
+        maximumAge: 1000,
+        timeout: 15000,
+      },
+    );
+
+    return () => navigator.geolocation.clearWatch(watchId);
+  }, [authUser]);
 
   async function handleGoogleSignIn() {
     setAuthError("");
@@ -767,7 +834,7 @@ function App() {
       <aside className="sidebar">
         <header className="brand">
           <span className="brand__mark" aria-hidden="true">
-            ✦
+          ⛰︎
           </span>
           <div>
             <p className="eyebrow">EXPLORA A TU RITMO</p>
@@ -794,6 +861,7 @@ function App() {
           )}
 
           {authError && <p role="alert">{authError}</p>}
+          {locationError && <p role="alert">{locationError}</p>}
           <p>
             {isAdmin
               ? "Acceso de administrador."
@@ -938,8 +1006,8 @@ function App() {
                       />
                       <span
                         className={`route-option__line${publishedRoute.category === "Sendero"
-                            ? " route-option__line--accessible"
-                            : ""
+                          ? " route-option__line--accessible"
+                          : ""
                           }`}
                         aria-hidden="true"
                       />
@@ -1073,25 +1141,48 @@ function App() {
           />
 
           <MapFocus position={selectedPoint?.position} />
+          <UserLocationFocus position={userLocation?.position} />
+          {userLocation && (
+            <Marker
+              position={toLeafletPosition(userLocation.position)}
+              icon={L.divIcon({
+                className: "user-location-marker",
+                html: `
+    <span
+      class="user-location-marker__dot"
+      style="transform: rotate(${userLocation.heading ?? 0}deg)"
+    >
+      ${userLocation.heading === null
+                    ? ""
+                    : '<span class="user-location-marker__arrow"></span>'
+                  }
+    </span>
+  `,
+                iconSize: [32, 32],
+                iconAnchor: [16, 16],
+              })}
+            >
+              <Popup>{authUser?.displayName || authUser?.email || "Usuario"}</Popup>
+            </Marker>
+          )}
 
-
-{publishedRoutes.map((publishedRoute, index) =>
-  selectedPublishedRouteIds.includes(publishedRoute.id) ? (
-    <Polyline
-      key={publishedRoute.id}
-      positions={publishedRoute.coordinates.map(toLeafletPosition)}
-      pathOptions={{
-        color: ["#d6335c", "#5b6ee1", "#d28a27", "#8a55a2"][
-          index % 4
-        ],
-        weight: 5,
-        opacity: 0.9,
-        dashArray:
-          publishedRoute.category === "Sendero" ? "6 6" : undefined,
-      }}
-    />
-  ) : null,
-)}
+          {publishedRoutes.map((publishedRoute, index) =>
+            selectedPublishedRouteIds.includes(publishedRoute.id) ? (
+              <Polyline
+                key={publishedRoute.id}
+                positions={publishedRoute.coordinates.map(toLeafletPosition)}
+                pathOptions={{
+                  color: ["#d6335c", "#5b6ee1", "#d28a27", "#8a55a2"][
+                    index % 4
+                  ],
+                  weight: 5,
+                  opacity: 0.9,
+                  dashArray:
+                    publishedRoute.category === "Sendero" ? "6 6" : undefined,
+                }}
+              />
+            ) : null,
+          )}
           {isAdmin && routeCoordinates.length >= 2 && (
             <Polyline
               positions={routeCoordinates.map(toLeafletPosition)}

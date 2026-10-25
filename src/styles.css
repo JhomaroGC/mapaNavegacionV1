@@ -783,3 +783,38 @@ h2 {
   cursor: wait;
   opacity: 0.65;
 }
+
+.user-location-marker {
+  border: 0;
+  background: transparent;
+}
+
+.user-location-marker__dot {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: #2878e3;
+  box-shadow: 0 2px 9px rgb(25 55 90 / 45%);
+}
+
+.user-location-marker__dot {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: #2878e3;
+  box-shadow: 0 2px 9px rgb(25 55 90 / 45%);
+  transition: transform 200ms linear;
+}
+
+.user-location-marker__arrow {
+  width: 0;
+  height: 0;
+  border-right: 5px solid transparent;
+  border-bottom: 12px solid #fff;
+  border-left: 5px solid transparent;
+}
