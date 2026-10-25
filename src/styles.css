@@ -131,7 +131,7 @@ h2 {
   border: 1px solid var(--line);
   border-radius: 11px;
   background: #fff;
-  color: #687570;
+  color: #4c23b1;
   cursor: pointer;
   font-size: 12px;
   font-weight: 600;
@@ -142,7 +142,7 @@ h2 {
 .route-option:hover,
 .route-option.is-active {
   border-color: #cce0d8;
-  background: #f6faf7;
+  background: var(--green);
   color: var(--ink);
 }
 
@@ -154,7 +154,7 @@ h2 {
 }
 
 .route-option__line--accessible {
-  border-top-color: var(--green);
+  border-top-color: var(--ink);
   border-top-style: dashed;
 }
 
@@ -817,4 +817,15 @@ h2 {
   border-right: 5px solid transparent;
   border-bottom: 12px solid #fff;
   border-left: 5px solid transparent;
+}
+
+.auth-panel button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.auth-panel button img {
+  width: 18px;
+  height: 18px;
 }

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import googleLogo from "./assets/google.svg";
 import {
   MapContainer,
   Marker,
@@ -856,7 +857,8 @@ function App() {
             </>
           ) : (
             <button type="button" onClick={handleGoogleSignIn}>
-              Para Navegar, continúa con Google
+               <img src={googleLogo} alt="" aria-hidden="true" />
+              Continúa con Google y Navega
             </button>
           )}
 
