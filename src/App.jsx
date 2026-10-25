@@ -865,7 +865,7 @@ function App() {
           <p>
             {isAdmin
               ? "Acceso de administrador."
-              : ""}
+              : "Accede para navegar"}
           </p>
         </section>
 
