@@ -856,7 +856,7 @@ function App() {
             </>
           ) : (
             <button type="button" onClick={handleGoogleSignIn}>
-              Continuar con Google
+              Para Navegar, continúa con Google
             </button>
           )}
 
@@ -865,7 +865,7 @@ function App() {
           <p>
             {isAdmin
               ? "Acceso de administrador."
-              : "Accede para navegar"}
+              : ""}
           </p>
         </section>
 
